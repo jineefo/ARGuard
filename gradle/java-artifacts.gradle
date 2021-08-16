@@ -27,6 +27,18 @@ publishing {
       version = version
     }
   }
+  repositories {
+    maven {
+      // change URLs to point to your repos, e.g. http://my.org/repo
+      def releasesRepoUrl = "http://127.0.0.1:8081/repository/maven-releases/"
+      def snapshotsRepoUrl = "http://127.0.0.1:8081/repository/maven-snapshots/"
+      url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+      credentials {
+        username = "admin"
+        password = "dandan123"
+      }
+    }
+  }
 }
 
 task buildAndPublishLocalMaven(dependsOn: ['build', 'publishResguardPublicationToMavenLocal']) {}
